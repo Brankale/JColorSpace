@@ -7,6 +7,6 @@ package com.github;
  * A common color model is the RGB color model which defines a color as
  * represented by a tuple of 3 numbers (red, green and blue).
  */
-public enum ColorModel {
-    XYZ, RGB, Lab
+public abstract class ColorModel {
+    protected abstract int componentCount();
 }
