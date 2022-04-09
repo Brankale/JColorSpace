@@ -38,7 +38,7 @@ public class FloatArray {
      * @return the value stored at the index
      * @throws IndexOutOfBoundsException if the index is greater than the size
      */
-    public double get(int index) {
+    public float get(int index) {
         return array[index];
     }
 
