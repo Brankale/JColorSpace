@@ -7,8 +7,6 @@ public class ColorSpaces {
         // hide constructor
     }
 
-    public static final ColorSpace CieXyY = new CieXyY();
-
     public static final ColorSpace CieLab = new CieLab();
 
 }
