@@ -12,13 +12,6 @@ public class CieLab extends ColorSpace {
     private static final double E = 0.008856;
     private static final double K = 903.3;
 
-    // D65 Illuminant converted in CIE XYZ coordinates
-    private static final FloatArray whitePoint = ColorSpaces.CieXyY.toXyz(
-            Illuminant.D65.x,
-            Illuminant.D65.y,
-            1                   // Y is assumed to be 1 for the white point
-    );
-
     public CieLab() {
         super("CIE Lab", ColorModels.Lab);
     }
@@ -35,9 +28,9 @@ public class CieLab extends ColorSpace {
 
     @Override
     public FloatArray fromXyz(float x, float y, float z) {
-        double xw = x / whitePoint.get(0);
-        double yw = y / whitePoint.get(1);
-        double zw = z / whitePoint.get(2);
+        double xw = x / Illuminant.D65.x;
+        double yw = y / Illuminant.D65.y;
+        double zw = z / Illuminant.D65.z;
 
         double fx, fy, fz;
 
@@ -96,14 +89,14 @@ public class CieLab extends ColorSpace {
             zr = (116 * fz  - 16) / K;
 
         FloatArray array = new FloatArray(3);
-        array.set(0, (float) (xr * whitePoint.get(0)));
-        array.set(0, (float) (yr * whitePoint.get(1)));
-        array.set(0, (float) (zr * whitePoint.get(2)));
+        array.set(0, (float) (xr * Illuminant.D65.x));
+        array.set(0, (float) (yr * Illuminant.D65.y));
+        array.set(0, (float) (zr * Illuminant.D65.z));
         return array;
     }
 
     @Override
     public FloatArray toXyz(FloatArray v) {
-        return null;
+        return toXyz(v.get(0), v.get(1), v.get(2));
     }
 }

@@ -9,6 +9,7 @@ public class WhitePoint {
 
     public final float x;
     public final float y;
+    public final float z;
 
     /**
      * Create a WhitePoint given CIE xyY coordinates.
@@ -17,15 +18,23 @@ public class WhitePoint {
      * @param y The y coordinate of CIExyY
      */
     public WhitePoint(float x, float y) {
-        this.x = x;
-        this.y = y;
+        // X = (x * Y) / y
+        this.x = x / y;
+        // Y is assumed to be 1
+        this.y = 1.0f;
+        // Z = (z * Y) / y, where z = 1 - x -y
+        this.z = (1 - x - y) / y;
     }
 
     /**
-     * Illuminant for CIE XYZ white point
+     * Illuminant for CIE XYZ white point.
      */
     public WhitePoint(float x, float y, float z) {
-        throw new UnsupportedOperationException();
+        if (y != 1.0f)
+            System.err.println("white point: trying to set Y != 1");
+        this.x = x;
+        this.y = 1.0f;
+        this.z = z;
     }
 
 }
