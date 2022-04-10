@@ -27,7 +27,7 @@ public abstract class ColorSpace {
      * @param component The index of the component, from 0 to 3, inclusive.
      * @return A floating point value less than getMaxValue
      */
-    abstract public float getMinValue(int component);
+    public abstract float getMinValue(int component);
 
     /**
      * Returns the maximum valid value for the specified component of this
@@ -36,7 +36,7 @@ public abstract class ColorSpace {
      * @param component The index of the component, from 0 to 3, inclusive
      * @return A floating point value greater than getMinValue
      */
-    abstract public float getMaxValue(int component);
+    public abstract float getMaxValue(int component);
 
     /**
      * Converts tristimulus values from the CIE XYZ space to this color
@@ -48,7 +48,7 @@ public abstract class ColorSpace {
      * @return A new array whose size is equal to the number of color
      * components as returned by ColorModel.componentCount.
      */
-    abstract public FloatArray fromXyz(float x, float y, float z);
+    public abstract FloatArray fromXyz(float x, float y, float z);
 
     /**
      * Converts tristimulus values from the CIE XYZ space to this color
@@ -59,7 +59,7 @@ public abstract class ColorSpace {
      * @return A new array whose size is equal to the number of color
      * components as returned by ColorModel.componentCount.
      */
-    abstract public FloatArray fromXyz(FloatArray v);
+    public abstract FloatArray fromXyz(FloatArray v);
 
     /**
      * Converts a color value from this color space's model to tristimulus
@@ -74,7 +74,7 @@ public abstract class ColorSpace {
      *          (typically B in RGB)
      * @return A new array of 3 floats, containing tristimulus XYZ values
      */
-    abstract public FloatArray toXyz(float r, float g, float b);
+    public abstract FloatArray toXyz(float r, float g, float b);
 
     /**
      * Converts a color value from this color space's model to tristimulus
@@ -86,6 +86,6 @@ public abstract class ColorSpace {
      *          resulting tristimulus XYZ values, at least 3 values.
      * @return A new array of 3 floats, containing tristimulus XYZ values
      */
-    abstract public FloatArray toXyz(FloatArray v);
+    public abstract FloatArray toXyz(FloatArray v);
 
 }
