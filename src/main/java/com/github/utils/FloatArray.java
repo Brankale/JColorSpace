@@ -1,5 +1,7 @@
 package com.github.utils;
 
+import java.util.Arrays;
+
 public class FloatArray {
 
     private final float[] array;
@@ -11,6 +13,10 @@ public class FloatArray {
      */
     public FloatArray(int size) {
         array = new float[size];
+    }
+
+    public FloatArray(float... v) {
+        array = Arrays.copyOf(v, v.length);
     }
 
     /**
