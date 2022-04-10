@@ -59,7 +59,9 @@ public abstract class ColorSpace {
      * @return A new array whose size is equal to the number of color
      * components as returned by ColorModel.componentCount.
      */
-    public abstract FloatArray fromXyz(FloatArray v);
+    public FloatArray fromXyz(FloatArray v) {
+        return fromXyz(v.get(0), v.get(1), v.get(2));
+    }
 
     /**
      * Converts a color value from this color space's model to tristimulus
@@ -86,6 +88,8 @@ public abstract class ColorSpace {
      *          resulting tristimulus XYZ values, at least 3 values.
      * @return A new array of 3 floats, containing tristimulus XYZ values
      */
-    public abstract FloatArray toXyz(FloatArray v);
+    public FloatArray toXyz(FloatArray v) {
+        return toXyz(v.get(0), v.get(1), v.get(2));
+    }
 
 }

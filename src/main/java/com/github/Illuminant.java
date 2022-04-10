@@ -1,7 +1,6 @@
 package com.github;
 
 public class Illuminant {
-
     private Illuminant() {
         // hide constructor
     }
