@@ -72,9 +72,15 @@ public class Connector {
     }
 
     public FloatArray transform(FloatArray v) {
-        SimpleMatrix rgbSrc = MatrixUtils.toSimpleMatrix(v, 3, 1);
+        FloatArray nonLinear = source.toLinear(v);
+
+        SimpleMatrix rgbSrc = MatrixUtils.toSimpleMatrix(nonLinear, 3, 1);
         SimpleMatrix rgbDst = conversionMatrix.mult(rgbSrc);
-        return MatrixUtils.toFloatArray(rgbDst);
+
+        FloatArray nonLinearDst = MatrixUtils.toFloatArray(rgbDst);
+        FloatArray linear = destination.fromLinear(nonLinearDst);
+
+        return linear;
     }
 
 }
