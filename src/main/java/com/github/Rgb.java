@@ -6,6 +6,7 @@ import com.github.utils.FloatArray;
 import com.github.utils.MatrixUtils;
 import org.ejml.simple.SimpleMatrix;
 
+import javax.swing.*;
 import java.util.List;
 import java.util.function.DoubleUnaryOperator;
 import java.util.stream.Stream;
@@ -211,13 +212,13 @@ public abstract class Rgb extends ColorSpace {
                 Zr, Zg, Zb
         });
 
-        SimpleMatrix v = new SimpleMatrix(3, 1, true, new double[] {
+        SimpleMatrix whitePointMatrix = new SimpleMatrix(3, 1, true, new double[] {
                 whitePoint.x,
                 whitePoint.y,
                 whitePoint.z
         });
 
-        SimpleMatrix s = tmp.invert().mult(v);
+        SimpleMatrix s = tmp.invert().mult(whitePointMatrix);
         double sr = s.get(0);
         double sg = s.get(1);
         double sb = s.get(2);
@@ -235,4 +236,13 @@ public abstract class Rgb extends ColorSpace {
         SimpleMatrix matrix = MatrixUtils.toSimpleMatrix(getTransform(), 3, 3);
         return MatrixUtils.toFloatArray(matrix.invert());
     }
+
+    public Connector connect(Rgb destinationColorSpace) {
+        return connect(destinationColorSpace, RenderIntent.ABSOLUTE);
+    }
+
+    public Connector connect(Rgb destinationColorSpace, RenderIntent renderIntent) {
+        return new Connector(this, destinationColorSpace, renderIntent);
+    }
+
 }
