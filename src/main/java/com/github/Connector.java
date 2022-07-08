@@ -13,6 +13,12 @@ public class Connector {
     private final RenderIntent renderIntent;
     private final SimpleMatrix conversionMatrix;
 
+    private static final SimpleMatrix BRADFORD = new SimpleMatrix(3, 3, true, new double[] {
+             0.8951,  0.2664, -0.1614,
+            -0.7502,  1.7135,  0.0367,
+             0.0389, -0.0685,  1.0296
+    });
+
     // TODO: In the Android documentation it accepts a ColorSpace instead of a Rgb object.
     //       Since not all colorspaces have a transform matrix it's easier to support only Rgb colorspaces.
     public Connector(Rgb source, Rgb destination, RenderIntent renderIntent) {
@@ -23,8 +29,30 @@ public class Connector {
         SimpleMatrix src = MatrixUtils.toSimpleMatrix(source.getTransform(), 3, 3);
         SimpleMatrix dst = MatrixUtils.toSimpleMatrix(destination.getInverseTransform(), 3, 3);
 
-        // TODO: adaptation matrix?
-        conversionMatrix = dst.mult(src);
+        SimpleMatrix chromaticAdaptationMtx = getChromaticAdaptationMtx();
+
+        conversionMatrix = dst.mult(chromaticAdaptationMtx).mult(src);
+    }
+
+    private SimpleMatrix getChromaticAdaptationMtx() {
+        SimpleMatrix srcW = new SimpleMatrix(3, 1, true, new double[] {
+                source.getWhitePoint().x, source.getWhitePoint().y, source.getWhitePoint().z
+        });
+
+        SimpleMatrix dstW = new SimpleMatrix(3, 1, true, new double[] {
+                destination.getWhitePoint().x, destination.getWhitePoint().y, destination.getWhitePoint().z
+        });
+
+        SimpleMatrix s = BRADFORD.mult(srcW);
+        SimpleMatrix d = BRADFORD.mult(dstW);
+
+        SimpleMatrix tmp = new SimpleMatrix(3, 3, true, new double[] {
+                d.get(0, 0) / s.get(0, 0), 0, 0,
+                0,  d.get(1, 0) / s.get(1, 0), 0,
+                0, 0, d.get(2, 0) / s.get(2, 0)
+        });
+
+        return BRADFORD.invert().mult(tmp).mult(BRADFORD);
     }
 
     public ColorSpace getSourceColorSpace() {
