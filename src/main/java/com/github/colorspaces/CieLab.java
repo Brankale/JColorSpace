@@ -2,6 +2,7 @@ package com.github.colorspaces;
 
 import com.github.AbstractColorSpace;
 import com.github.Illuminant;
+import com.github.WhitePoint;
 import com.github.colormodels.ColorModels;
 import com.github.utils.FloatArray;
 
@@ -11,6 +12,7 @@ import com.github.utils.FloatArray;
 public class CieLab extends AbstractColorSpace {
     private static final double E = 0.008856;
     private static final double K = 903.3;
+    private static final WhitePoint illuminant = Illuminant.D65;
 
     public CieLab() {
         super("CIE Lab", ColorModels.Lab);
@@ -28,9 +30,9 @@ public class CieLab extends AbstractColorSpace {
 
     @Override
     public FloatArray fromXyz(float x, float y, float z) {
-        double xw = x / Illuminant.D65.x;
-        double yw = y / Illuminant.D65.y;
-        double zw = z / Illuminant.D65.z;
+        double xw = x / illuminant.x;
+        double yw = y / illuminant.y;
+        double zw = z / illuminant.z;
 
         double fx = xw > E ? Math.cbrt(xw) : (K * xw + 16) / 116.0;
         double fy = yw > E ? Math.cbrt(yw) : (K * yw + 16) / 116.0;
@@ -58,9 +60,9 @@ public class CieLab extends AbstractColorSpace {
         double zr = Math.pow(fz, 3) > E ? Math.pow(fz, 3) : (116 * fz  - 16) / K;
 
         FloatArray array = new FloatArray(3);
-        array.set(0, (float) (xr * Illuminant.D65.x));
-        array.set(0, (float) (yr * Illuminant.D65.y));
-        array.set(0, (float) (zr * Illuminant.D65.z));
+        array.set(0, (float) (xr * illuminant.x));
+        array.set(0, (float) (yr * illuminant.y));
+        array.set(0, (float) (zr * illuminant.z));
         return array;
     }
 }
