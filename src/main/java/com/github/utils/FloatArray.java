@@ -48,4 +48,8 @@ public class FloatArray {
         return array[index];
     }
 
+    @Override
+    public String toString() {
+        return Arrays.toString(array);
+    }
 }
