@@ -50,6 +50,11 @@ public class CieLab extends ColorSpace {
     }
 
     @Override
+    public FloatArray fromXyz(FloatArray v) {
+        return fromXyz(v.get(0), v.get(1), v.get(2));
+    }
+
+    @Override
     public FloatArray toXyz(float l, float a, float b) {
         double fy = (l + 16) / 116.0;
         double fx = (a / 500.0) + fy;
@@ -64,5 +69,10 @@ public class CieLab extends ColorSpace {
         array.set(0, (float) (yr * illuminant.y));
         array.set(0, (float) (zr * illuminant.z));
         return array;
+    }
+
+    @Override
+    public FloatArray toXyz(FloatArray v) {
+        return toXyz(v.get(0), v.get(1), v.get(2));
     }
 }
