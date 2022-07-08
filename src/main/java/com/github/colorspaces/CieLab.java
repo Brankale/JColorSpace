@@ -32,22 +32,9 @@ public class CieLab extends AbstractColorSpace {
         double yw = y / Illuminant.D65.y;
         double zw = z / Illuminant.D65.z;
 
-        double fx, fy, fz;
-
-        if (xw > E)
-            fx = Math.cbrt(xw);
-        else
-            fx = (K * xw + 16) / 116.0;
-
-        if (yw > E)
-            fy = Math.cbrt(yw);
-        else
-            fy = (K * yw + 16) / 116.0;
-
-        if (zw > E)
-            fz = Math.cbrt(zw);
-        else
-            fz = (K * zw + 16) / 116.0;
+        double fx = xw > E ? Math.cbrt(xw) : (K * xw + 16) / 116.0;
+        double fy = yw > E ? Math.cbrt(yw) : (K * yw + 16) / 116.0;
+        double fz = zw > E ? Math.cbrt(zw) : (K * zw + 16) / 116.0;
 
         double l = 116 * fy - 16;
         double a = 500 * (fx - fy);
@@ -66,22 +53,9 @@ public class CieLab extends AbstractColorSpace {
         double fx = (a / 500.0) + fy;
         double fz = fy - (b / 200.0);
 
-        double xr, yr, zr;
-
-        if (Math.pow(fx, 3) > E)
-            xr = Math.pow(fx, 3);
-        else
-            xr = (116 * fx  - 16) / K;
-
-        if (l > (K * E))
-            yr = Math.pow(fy, 3);
-        else
-            yr = l / K;
-
-        if (Math.pow(fz, 3) > E)
-            zr = Math.pow(fz, 3);
-        else
-            zr = (116 * fz  - 16) / K;
+        double xr = Math.pow(fx, 3) > E ? Math.pow(fx, 3) : (116 * fx  - 16) / K;
+        double yr = l > (K * E) ? Math.pow(fy, 3) : l / K;
+        double zr = Math.pow(fz, 3) > E ? Math.pow(fz, 3) : (116 * fz  - 16) / K;
 
         FloatArray array = new FloatArray(3);
         array.set(0, (float) (xr * Illuminant.D65.x));

@@ -7,7 +7,7 @@ public abstract class AbstractColorSpace {
     private final String name;
     private final ColorModel colorModel;
 
-    public AbstractColorSpace(String name, ColorModel colorModel) {
+    protected AbstractColorSpace(String name, ColorModel colorModel) {
         this.name = name;
         this.colorModel = colorModel;
     }
