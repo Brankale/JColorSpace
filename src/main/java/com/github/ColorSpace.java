@@ -2,12 +2,12 @@ package com.github;
 
 import com.github.utils.FloatArray;
 
-public abstract class AbstractColorSpace {
+public abstract class ColorSpace {
 
     private final String name;
     private final ColorModel colorModel;
 
-    protected AbstractColorSpace(String name, ColorModel colorModel) {
+    protected ColorSpace(String name, ColorModel colorModel) {
         this.name = name;
         this.colorModel = colorModel;
     }
@@ -25,7 +25,7 @@ public abstract class AbstractColorSpace {
      * color space's color model.
      *
      * @param component The index of the component, from 0 to 3, inclusive.
-     * @return A floating point value less than getMaxValue
+     * @return A floating point value lower than getMaxValue.
      */
     public abstract float getMinValue(int component);
 
@@ -34,7 +34,7 @@ public abstract class AbstractColorSpace {
      * color space's color model.
      *
      * @param component The index of the component, from 0 to 3, inclusive
-     * @return A floating point value greater than getMinValue
+     * @return A floating point value greater than getMinValue.
      */
     public abstract float getMaxValue(int component);
 
