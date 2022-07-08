@@ -140,9 +140,12 @@ public abstract class Rgb extends ColorSpace {
         this.eotf = eotf;
     }
 
-    // TODO: implement
     public FloatArray getPrimaries() {
-        throw new RuntimeException("getPrimaries() must be implemented");
+        return new FloatArray(
+                primaries[0].x(), primaries[0].y(),
+                primaries[1].x(), primaries[1].y(),
+                primaries[2].x(), primaries[2].y()
+        );
     }
 
     private ChromaticyCoordinate getRedChromaticityCoord() {
