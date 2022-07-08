@@ -1,6 +1,6 @@
 package com.github.colorspaces;
 
-import com.github.ColorSpace;
+import com.github.AbstractColorSpace;
 import com.github.Illuminant;
 import com.github.colormodels.ColorModels;
 import com.github.utils.FloatArray;
@@ -8,7 +8,7 @@ import com.github.utils.FloatArray;
 /**
  * Illuminant for CieLab is assumed to be D65
  */
-public class CieLab extends ColorSpace {
+public class CieLab extends AbstractColorSpace {
     private static final double E = 0.008856;
     private static final double K = 903.3;
 

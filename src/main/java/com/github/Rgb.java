@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.function.DoubleUnaryOperator;
 import java.util.stream.Stream;
 
-public abstract class Rgb extends ColorSpace {
+public abstract class Rgb extends AbstractColorSpace {
     private final FloatArray primaries;
     private final WhitePoint whitePoint;
     private final List<DoubleUnaryOperator> oetf;

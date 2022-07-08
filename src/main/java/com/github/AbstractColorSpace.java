@@ -2,12 +2,12 @@ package com.github;
 
 import com.github.utils.FloatArray;
 
-public abstract class ColorSpace {
+public abstract class AbstractColorSpace {
 
     private final String name;
     private final ColorModel colorModel;
 
-    public ColorSpace(String name, ColorModel colorModel) {
+    public AbstractColorSpace(String name, ColorModel colorModel) {
         this.name = name;
         this.colorModel = colorModel;
     }
