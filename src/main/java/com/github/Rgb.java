@@ -1,21 +1,24 @@
 package com.github;
 
 import com.github.colormodels.ColorModels;
+import com.github.utils.ChromaticyCoordinate;
 import com.github.utils.FloatArray;
+import com.github.utils.MatrixUtils;
+import org.ejml.simple.SimpleMatrix;
 
 import java.util.List;
 import java.util.function.DoubleUnaryOperator;
 import java.util.stream.Stream;
 
 public abstract class Rgb extends ColorSpace {
-    private final FloatArray primaries;
+    private final ChromaticyCoordinate[] primaries;
     private final WhitePoint whitePoint;
 
     /**
      * The opto-electronic transfer function (OETF or OECF) encodes tristimulus values in a scene
      * to a non-linear electronic signal value. An OETF is often expressed as a power function
      * with an exponent between 0.38 and 0.55 (the reciprocal of 1.8 to 2.6).
-     * 
+     *
      * The list contains three OETFs, one for each channel RED, GREEN and BLUE.
      */
     private final List<DoubleUnaryOperator> oetf;
@@ -98,7 +101,11 @@ public abstract class Rgb extends ColorSpace {
             DoubleUnaryOperator eotf
     ) {
         super(name, ColorModels.RGB);
-        this.primaries = primaries;
+        this.primaries = new ChromaticyCoordinate[] {
+                new ChromaticyCoordinate(primaries.get(0), primaries.get(1)),
+                new ChromaticyCoordinate(primaries.get(2), primaries.get(3)),
+                new ChromaticyCoordinate(primaries.get(4), primaries.get(5)),
+        };
         this.whitePoint = whitePoint;
         this.oetf = List.of(oetf, oetf, oetf);
         this.eotf = List.of(eotf, eotf, eotf);
@@ -123,14 +130,31 @@ public abstract class Rgb extends ColorSpace {
             List<DoubleUnaryOperator> eotf
     ) {
         super(name, ColorModels.RGB);
-        this.primaries = primaries;
+        this.primaries = new ChromaticyCoordinate[] {
+                new ChromaticyCoordinate(primaries.get(0), primaries.get(1)),
+                new ChromaticyCoordinate(primaries.get(2), primaries.get(3)),
+                new ChromaticyCoordinate(primaries.get(4), primaries.get(5)),
+        };
         this.whitePoint = whitePoint;
         this.oetf = oetf;
         this.eotf = eotf;
     }
 
+    // TODO: implement
     public FloatArray getPrimaries() {
-        return primaries;
+        throw new RuntimeException("getPrimaries() must be implemented");
+    }
+
+    private ChromaticyCoordinate getRedChromaticityCoord() {
+        return primaries[0];
+    }
+
+    private ChromaticyCoordinate getGreenChromaticityCoord() {
+        return primaries[1];
+    }
+
+    private ChromaticyCoordinate getBlueChromaticityCoord() {
+        return primaries[2];
     }
 
     public WhitePoint getWhitePoint() {
@@ -161,9 +185,51 @@ public abstract class Rgb extends ColorSpace {
         return toLinear(v.get(0), v.get(1), v.get(2));
     }
 
-    // TODO: implement this method
-    public abstract FloatArray getTransform();
+    public FloatArray getTransform() {
+        ChromaticyCoordinate r = getRedChromaticityCoord();
+        ChromaticyCoordinate g = getGreenChromaticityCoord();
+        ChromaticyCoordinate b = getBlueChromaticityCoord();
 
-    // TODO: implement this method
-    public abstract FloatArray getInverseTransform();
+        double Xr = r.x() / r.y();
+        double Xg = g.x() / g.y();
+        double Xb = b.x() / b.y();
+
+        double Yr = 1.0f;
+        double Yg = 1.0f;
+        double Yb = 1.0f;
+
+        double Zr = (1.0f - r.x() - r.y()) / r.y();
+        double Zg = (1.0f - g.x() - g.y()) / g.y();
+        double Zb = (1.0f - b.x() - b.y()) / b.y();
+
+        SimpleMatrix tmp = new SimpleMatrix(3, 3, true, new double[] {
+                Xr, Xg, Xb,
+                Yr, Yg, Yb,
+                Zr, Zg, Zb
+        });
+
+        SimpleMatrix v = new SimpleMatrix(3, 1, true, new double[] {
+                whitePoint.x,
+                whitePoint.y,
+                whitePoint.z
+        });
+
+        SimpleMatrix s = tmp.invert().mult(v);
+        double sr = s.get(0);
+        double sg = s.get(1);
+        double sb = s.get(2);
+
+        SimpleMatrix transformMatrix = new SimpleMatrix(3, 3, true, new double[] {
+                sr * Xr, sg * Xg, sb * Xb,
+                sr * Yr, sg * Yg, sb * Yb,
+                sr * Zr, sg * Zg, sb * Zb
+        });
+
+        return MatrixUtils.toFloatArray(transformMatrix);
+    }
+
+    public FloatArray getInverseTransform() {
+        SimpleMatrix matrix = MatrixUtils.toSimpleMatrix(getTransform(), 3, 3);
+        return MatrixUtils.toFloatArray(matrix.invert());
+    }
 }
