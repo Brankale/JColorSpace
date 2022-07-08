@@ -251,6 +251,16 @@ public abstract class Rgb extends ColorSpace {
         return MatrixUtils.toFloatArray(rgb);
     }
 
+    @Override
+    public float getMinValue(int component) {
+        return 0;
+    }
+
+    @Override
+    public float getMaxValue(int component) {
+        return 1.0f;
+    }
+
     public Connector connect(Rgb destinationColorSpace) {
         return connect(destinationColorSpace, RenderIntent.ABSOLUTE);
     }
