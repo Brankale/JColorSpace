@@ -17,6 +17,8 @@ public enum RenderIntent {
      * Compresses the source gamut into the destination gamut.
      * This render intent affects all colors, inside and outside of destination gamut.
      * The goal of this render intent is to preserve the visual relationship between colors.
+     *
+     * This render intent is currently NOT implemented and behaves like RELATIVE.
      */
     PERCEPTUAL,
 
@@ -31,6 +33,8 @@ public enum RenderIntent {
      * Attempts to maintain the relative saturation of colors from the source
      * gamut to the destination gamut, to keep highly saturated colors as
      * saturated as possible.
+     *
+     * This render intent is currently NOT implemented and behaves like RELATIVE.
      */
     SATURATION
 }

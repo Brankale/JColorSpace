@@ -31,9 +31,14 @@ public class Connector {
         SimpleMatrix src = MatrixUtils.toSimpleMatrix(source.getTransform(), 3, 3);
         SimpleMatrix dst = MatrixUtils.toSimpleMatrix(destination.getInverseTransform(), 3, 3);
 
-        SimpleMatrix chromaticAdaptationMtx = getChromaticAdaptationMtx();
-
-        conversionMatrix = dst.mult(chromaticAdaptationMtx).mult(src);
+        if (renderIntent == RenderIntent.ABSOLUTE) {
+            // skip chromatic adaptation
+            conversionMatrix = dst.mult(src);
+        } else {
+            // also perform chromatic adaptation
+            SimpleMatrix chromaticAdaptationMtx = getChromaticAdaptationMtx();
+            conversionMatrix = dst.mult(chromaticAdaptationMtx).mult(src);
+        }
     }
 
     private SimpleMatrix getChromaticAdaptationMtx() {
