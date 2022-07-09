@@ -80,9 +80,7 @@ public class Connector {
         SimpleMatrix rgbDst = conversionMatrix.mult(rgbSrc);
 
         FloatArray nonLinearDst = MatrixUtils.toFloatArray(rgbDst);
-        FloatArray linear = destination.fromLinear(nonLinearDst);
-
-        return linear;
+        return destination.fromLinear(nonLinearDst);
     }
 
 }

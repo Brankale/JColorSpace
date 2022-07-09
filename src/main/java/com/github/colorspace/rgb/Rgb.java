@@ -41,7 +41,7 @@ public abstract class Rgb extends ColorSpace {
      * @param whitePoint the white point.
      * @param gamma      the gamma function applied to all the three channels (i.e. R, G, B).
      */
-    public Rgb(
+    protected Rgb(
             String name,
             FloatArray primaries,
             WhitePoint whitePoint,
@@ -60,7 +60,7 @@ public abstract class Rgb extends ColorSpace {
      * @param gammaGreen the gamma function applied to the green channel.
      * @param gammaBlue  the gamma function applied to the blue channel.
      */
-    public Rgb(
+    protected Rgb(
             String name,
             FloatArray primaries,
             WhitePoint whitePoint,
@@ -94,7 +94,7 @@ public abstract class Rgb extends ColorSpace {
      * @param oetf       the OETF function applied to all the three channels (i.e. R, G, B).
      * @param eotf       the EOTF function applied to all the three channels (i.e. R, G, B).
      */
-    public Rgb(
+    protected Rgb(
             String name,
             FloatArray primaries,
             WhitePoint whitePoint,
@@ -123,7 +123,7 @@ public abstract class Rgb extends ColorSpace {
      * @param eotf       a list with the EOTFs functions applied to the three channels. The first EOTF will be applied
      *                   to the RED channel, the second the GREEN channel and the last one to the BLUE channel.
      */
-    public Rgb(
+    protected Rgb(
             String name,
             FloatArray primaries,
             WhitePoint whitePoint,
@@ -194,22 +194,22 @@ public abstract class Rgb extends ColorSpace {
         ChromaticyCoordinate g = getGreenChromaticityCoord();
         ChromaticyCoordinate b = getBlueChromaticityCoord();
 
-        double Xr = r.x() / r.y();
-        double Xg = g.x() / g.y();
-        double Xb = b.x() / b.y();
+        double xr = r.x() / r.y();
+        double xg = g.x() / g.y();
+        double xb = b.x() / b.y();
 
-        double Yr = 1.0f;
-        double Yg = 1.0f;
-        double Yb = 1.0f;
+        double yr = 1.0f;
+        double yg = 1.0f;
+        double yb = 1.0f;
 
-        double Zr = (1.0f - r.x() - r.y()) / r.y();
-        double Zg = (1.0f - g.x() - g.y()) / g.y();
-        double Zb = (1.0f - b.x() - b.y()) / b.y();
+        double zr = (1.0f - r.x() - r.y()) / r.y();
+        double zg = (1.0f - g.x() - g.y()) / g.y();
+        double zb = (1.0f - b.x() - b.y()) / b.y();
 
         SimpleMatrix tmp = new SimpleMatrix(3, 3, true, new double[] {
-                Xr, Xg, Xb,
-                Yr, Yg, Yb,
-                Zr, Zg, Zb
+                xr, xg, xb,
+                yr, yg, yb,
+                zr, zg, zb
         });
 
         SimpleMatrix whitePointMatrix = new SimpleMatrix(3, 1, true, new double[] {
@@ -224,9 +224,9 @@ public abstract class Rgb extends ColorSpace {
         double sb = s.get(2);
 
         SimpleMatrix transformMatrix = new SimpleMatrix(3, 3, true, new double[] {
-                sr * Xr, sg * Xg, sb * Xb,
-                sr * Yr, sg * Yg, sb * Yb,
-                sr * Zr, sg * Zg, sb * Zb
+                sr * xr, sg * xg, sb * xb,
+                sr * yr, sg * yg, sb * yb,
+                sr * zr, sg * zg, sb * zb
         });
 
         return MatrixUtils.toFloatArray(transformMatrix);
