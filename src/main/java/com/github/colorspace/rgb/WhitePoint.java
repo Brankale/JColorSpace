@@ -1,4 +1,4 @@
-package com.github;
+package com.github.colorspace.rgb;
 
 /**
  * Class for constructing white points used in RGB color space.

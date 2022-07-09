@@ -1,4 +1,4 @@
-package com.github;
+package com.github.colorspace.connector;
 
 /**
  * A render intent determines how a connector maps colors from one color space

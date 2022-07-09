@@ -1,4 +1,4 @@
-package com.github;
+package com.github.colorspace;
 
 import com.github.utils.FloatArray;
 

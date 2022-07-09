@@ -1,7 +1,7 @@
 package com.github.colorspaces;
 
-import com.github.ColorSpace;
-import com.github.Rgb;
+import com.github.colorspace.ColorSpace;
+import com.github.colorspace.rgb.Rgb;
 
 public class ColorSpaces {
     private ColorSpaces() {

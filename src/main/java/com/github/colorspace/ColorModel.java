@@ -1,4 +1,4 @@
-package com.github;
+package com.github.colorspace;
 
 /**
  * A color model is required by a ColorSpace to describe the way colors can be

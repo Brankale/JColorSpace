@@ -1,4 +1,4 @@
-package com.github;
+package com.github.colorspace.rgb;
 
 public class Illuminant {
     private Illuminant() {

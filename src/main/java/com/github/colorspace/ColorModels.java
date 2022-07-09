@@ -1,6 +1,6 @@
-package com.github.colormodels;
+package com.github.colorspace;
 
-import com.github.ColorModel;
+import com.github.colorspace.ColorModel;
 
 public class ColorModels {
     private ColorModels() {

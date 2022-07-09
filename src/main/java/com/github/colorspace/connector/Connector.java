@@ -1,5 +1,7 @@
-package com.github;
+package com.github.colorspace.connector;
 
+import com.github.colorspace.ColorSpace;
+import com.github.colorspace.rgb.Rgb;
 import com.github.utils.FloatArray;
 import com.github.utils.MatrixUtils;
 import org.ejml.simple.SimpleMatrix;

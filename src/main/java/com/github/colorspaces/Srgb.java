@@ -1,8 +1,8 @@
 package com.github.colorspaces;
 
-import com.github.Illuminant;
-import com.github.Primaries;
-import com.github.Rgb;
+import com.github.colorspace.rgb.Illuminant;
+import com.github.colorspace.rgb.Primaries;
+import com.github.colorspace.rgb.Rgb;
 
 public class Srgb extends Rgb {
     public Srgb() {

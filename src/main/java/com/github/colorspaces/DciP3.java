@@ -1,7 +1,7 @@
 package com.github.colorspaces;
 
-import com.github.Rgb;
-import com.github.WhitePoint;
+import com.github.colorspace.rgb.Rgb;
+import com.github.colorspace.rgb.WhitePoint;
 import com.github.utils.FloatArray;
 
 public class DciP3 extends Rgb {

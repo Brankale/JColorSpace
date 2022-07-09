@@ -1,15 +1,15 @@
-package com.github;
+package com.github.colorspace.rgb;
 
-import com.github.colormodels.ColorModels;
-import com.github.utils.ChromaticyCoordinate;
+import com.github.colorspace.ColorModels;
+import com.github.colorspace.connector.Connector;
+import com.github.colorspace.connector.RenderIntent;
+import com.github.colorspace.ColorSpace;
 import com.github.utils.FloatArray;
 import com.github.utils.MatrixUtils;
 import org.ejml.simple.SimpleMatrix;
 
-import javax.swing.*;
 import java.util.List;
 import java.util.function.DoubleUnaryOperator;
-import java.util.stream.Stream;
 
 public abstract class Rgb extends ColorSpace {
     private final ChromaticyCoordinate[] primaries;

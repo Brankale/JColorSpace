@@ -1,9 +1,9 @@
 package com.github.colorspaces;
 
-import com.github.ColorSpace;
-import com.github.Illuminant;
-import com.github.WhitePoint;
-import com.github.colormodels.ColorModels;
+import com.github.colorspace.ColorSpace;
+import com.github.colorspace.rgb.Illuminant;
+import com.github.colorspace.rgb.WhitePoint;
+import com.github.colorspace.ColorModels;
 import com.github.utils.FloatArray;
 
 /**
