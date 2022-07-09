@@ -8,11 +8,15 @@ package com.github.colorspace.connector;
 public enum RenderIntent {
     /**
      * Colors that are in the destination gamut are left unchanged.
+     * Colors that fall outside the destination gamut are mapped to the closest possible
+     * color within the gamut of the destination color space (they are clipped).
      */
     ABSOLUTE,
 
     /**
      * Compresses the source gamut into the destination gamut.
+     * This render intent affects all colors, inside and outside of destination gamut.
+     * The goal of this render intent is to preserve the visual relationship between colors.
      */
     PERCEPTUAL,
 
