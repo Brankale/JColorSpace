@@ -8,12 +8,12 @@ import org.ejml.simple.SimpleMatrix;
 
 public class Connector {
 
-    private final Rgb source;
-    private final Rgb destination;
+    private final ColorSpace source;
+    private final ColorSpace destination;
     // TODO: since I don't know how to support different types of renderIntents
     //       I leaved the attribute here but it's not used.
     private final RenderIntent renderIntent;
-    private final SimpleMatrix conversionMatrix;
+    private SimpleMatrix conversionMatrix;
 
     private static final SimpleMatrix BRADFORD = new SimpleMatrix(3, 3, true, new double[] {
              0.8951,  0.2664, -0.1614,
@@ -21,33 +21,37 @@ public class Connector {
              0.0389, -0.0685,  1.0296
     });
 
-    // TODO: In the Android documentation it accepts a ColorSpace instead of a Rgb object.
-    //       Since not all colorspaces have a transform matrix it's easier to support only Rgb colorspaces.
-    public Connector(Rgb source, Rgb destination, RenderIntent renderIntent) {
+    public Connector(ColorSpace source, ColorSpace destination, RenderIntent renderIntent) {
         this.source = source;
         this.destination = destination;
         this.renderIntent = renderIntent;
 
-        SimpleMatrix src = MatrixUtils.toSimpleMatrix(source.getTransform(), 3, 3);
-        SimpleMatrix dst = MatrixUtils.toSimpleMatrix(destination.getInverseTransform(), 3, 3);
+        // TODO: consider using abstract class to remove this horrible check
+        if (source instanceof Rgb && destination instanceof Rgb) {
+            SimpleMatrix src = MatrixUtils.toSimpleMatrix(((Rgb) source).getTransform(), 3, 3);
+            SimpleMatrix dst = MatrixUtils.toSimpleMatrix(((Rgb) destination).getInverseTransform(), 3, 3);
 
-        if (renderIntent == RenderIntent.ABSOLUTE) {
-            // skip chromatic adaptation
-            conversionMatrix = dst.mult(src);
-        } else {
-            // also perform chromatic adaptation
-            SimpleMatrix chromaticAdaptationMtx = getChromaticAdaptationMtx();
-            conversionMatrix = dst.mult(chromaticAdaptationMtx).mult(src);
+            if (renderIntent == RenderIntent.ABSOLUTE) {
+                // skip chromatic adaptation
+                conversionMatrix = dst.mult(src);
+            } else {
+                // also perform chromatic adaptation
+                SimpleMatrix chromaticAdaptationMtx = getChromaticAdaptationMtx();
+                conversionMatrix = dst.mult(chromaticAdaptationMtx).mult(src);
+            }
         }
     }
 
     private SimpleMatrix getChromaticAdaptationMtx() {
+        Rgb src = (Rgb) source;
+        Rgb dst = (Rgb) destination;
+
         SimpleMatrix srcW = new SimpleMatrix(3, 1, true, new double[] {
-                source.getWhitePoint().x, source.getWhitePoint().y, source.getWhitePoint().z
+                src.getWhitePoint().x, src.getWhitePoint().y, src.getWhitePoint().z
         });
 
         SimpleMatrix dstW = new SimpleMatrix(3, 1, true, new double[] {
-                destination.getWhitePoint().x, destination.getWhitePoint().y, destination.getWhitePoint().z
+                dst.getWhitePoint().x, dst.getWhitePoint().y, dst.getWhitePoint().z
         });
 
         SimpleMatrix s = BRADFORD.mult(srcW);
@@ -79,13 +83,22 @@ public class Connector {
     }
 
     public FloatArray transform(FloatArray v) {
-        FloatArray nonLinear = source.toLinear(v);
+        // TODO: consider using abstract class to remove this horrible check
+        if (source instanceof Rgb && destination instanceof Rgb) {
+            Rgb src = (Rgb) source;
+            Rgb dst = (Rgb) destination;
 
-        SimpleMatrix rgbSrc = MatrixUtils.toSimpleMatrix(nonLinear, 3, 1);
-        SimpleMatrix rgbDst = conversionMatrix.mult(rgbSrc);
+            FloatArray nonLinear = src.toLinear(v);
 
-        FloatArray nonLinearDst = MatrixUtils.toFloatArray(rgbDst);
-        return destination.fromLinear(nonLinearDst);
+            SimpleMatrix rgbSrc = MatrixUtils.toSimpleMatrix(nonLinear, 3, 1);
+            SimpleMatrix rgbDst = conversionMatrix.mult(rgbSrc);
+
+            FloatArray nonLinearDst = MatrixUtils.toFloatArray(rgbDst);
+            return dst.fromLinear(nonLinearDst);
+        } else {
+            FloatArray xyz = source.toXyz(v);
+            return destination.fromXyz(xyz);
+        }
     }
 
 }
