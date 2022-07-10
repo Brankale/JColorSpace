@@ -1,5 +1,9 @@
 package com.github.colorspace;
 
+import com.github.colorspace.connector.Connector;
+import com.github.colorspace.connector.RenderIntent;
+import com.github.colorspace.connector.SimpleConnector;
+import com.github.colorspace.rgb.Rgb;
 import com.github.utils.FloatArray;
 
 public abstract class ColorSpace {
@@ -92,4 +96,11 @@ public abstract class ColorSpace {
      */
     public abstract FloatArray toXyz(FloatArray v);
 
+    public Connector connect(ColorSpace destinationColorSpace) {
+        return connect(destinationColorSpace, RenderIntent.ABSOLUTE);
+    }
+
+    public Connector connect(ColorSpace destinationColorSpace, RenderIntent renderIntent) {
+        return new SimpleConnector(this, destinationColorSpace, renderIntent);
+    }
 }

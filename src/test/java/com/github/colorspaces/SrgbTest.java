@@ -1,11 +1,10 @@
 package com.github.colorspaces;
 
 import com.github.colorspace.ColorSpace;
-import com.github.colorspaces.ColorSpaces;
 import com.github.utils.FloatArray;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * rgb values should be in range [0, 1].

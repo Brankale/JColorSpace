@@ -1,15 +1,15 @@
 package com.github.colorspace.rgb;
 
 import com.github.colorspace.ColorModels;
+import com.github.colorspace.ColorSpace;
 import com.github.colorspace.connector.Connector;
 import com.github.colorspace.connector.RenderIntent;
-import com.github.colorspace.ColorSpace;
-import com.github.colorspaces.ColorSpaces;
+import com.github.colorspace.connector.RgbConnector;
+import com.github.colorspace.connector.SimpleConnector;
 import com.github.utils.FloatArray;
 import com.github.utils.MatrixUtils;
 import org.ejml.simple.SimpleMatrix;
 
-import java.awt.*;
 import java.util.List;
 import java.util.function.DoubleUnaryOperator;
 
@@ -264,12 +264,11 @@ public abstract class Rgb extends ColorSpace {
         return 1.0f;
     }
 
-    public Connector connect(ColorSpace destinationColorSpace) {
+    public Connector connect(Rgb destinationColorSpace) {
         return connect(destinationColorSpace, RenderIntent.ABSOLUTE);
     }
 
-    public Connector connect(ColorSpace destinationColorSpace, RenderIntent renderIntent) {
-        return new Connector(this, destinationColorSpace, renderIntent);
+    public Connector connect(Rgb destinationColorSpace, RenderIntent renderIntent) {
+        return new RgbConnector(this, destinationColorSpace, renderIntent);
     }
-
 }

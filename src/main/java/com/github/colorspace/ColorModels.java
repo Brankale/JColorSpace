@@ -1,7 +1,5 @@
 package com.github.colorspace;
 
-import com.github.colorspace.ColorModel;
-
 public class ColorModels {
     private ColorModels() {
         // hide constructor
