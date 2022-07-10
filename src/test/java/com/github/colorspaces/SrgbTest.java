@@ -1,3 +1,5 @@
+package com.github.colorspaces;
+
 import com.github.colorspace.ColorSpace;
 import com.github.colorspaces.ColorSpaces;
 import com.github.utils.FloatArray;
