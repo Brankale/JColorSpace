@@ -20,12 +20,22 @@ public class CieLab extends ColorSpace {
 
     @Override
     public float getMinValue(int component) {
-        throw new UnsupportedOperationException();
+        return switch (component) {
+            case 0 -> 0;
+            case 1, 2 -> -128.0f;
+            default -> throw new IllegalArgumentException("CieLab has only three components." +
+                    "Requested component: " + component + ".");
+        };
     }
 
     @Override
     public float getMaxValue(int component) {
-        throw new UnsupportedOperationException();
+        return switch (component) {
+            case 0 -> 100;
+            case 1, 2 -> 128.0f;
+            default -> throw new IllegalArgumentException("CieLab has only three components." +
+                    "Requested component: " + component + ".");
+        };
     }
 
     /**
