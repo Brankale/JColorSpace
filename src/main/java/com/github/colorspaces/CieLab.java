@@ -28,6 +28,12 @@ public class CieLab extends ColorSpace {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * @param x The X component of the color value
+     * @param y The Y component of the color value
+     * @param z The Z component of the color value
+     * @return a FloatArray of length three with L, a, b values.
+     */
     @Override
     public FloatArray fromXyz(float x, float y, float z) {
         double xw = x / illuminant.x;
