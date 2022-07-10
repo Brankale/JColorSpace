@@ -72,8 +72,8 @@ public class CieLab extends ColorSpace {
 
         FloatArray array = new FloatArray(3);
         array.set(0, (float) (xr * illuminant.x));
-        array.set(0, (float) (yr * illuminant.y));
-        array.set(0, (float) (zr * illuminant.z));
+        array.set(1, (float) (yr * illuminant.y));
+        array.set(2, (float) (zr * illuminant.z));
         return array;
     }
 
