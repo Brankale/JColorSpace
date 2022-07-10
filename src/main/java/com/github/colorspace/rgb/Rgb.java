@@ -5,7 +5,6 @@ import com.github.colorspace.ColorSpace;
 import com.github.colorspace.connector.Connector;
 import com.github.colorspace.connector.RenderIntent;
 import com.github.colorspace.connector.RgbConnector;
-import com.github.colorspace.connector.SimpleConnector;
 import com.github.utils.FloatArray;
 import com.github.utils.MatrixUtils;
 import org.ejml.simple.SimpleMatrix;

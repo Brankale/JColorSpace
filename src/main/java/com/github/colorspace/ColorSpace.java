@@ -3,7 +3,6 @@ package com.github.colorspace;
 import com.github.colorspace.connector.Connector;
 import com.github.colorspace.connector.RenderIntent;
 import com.github.colorspace.connector.SimpleConnector;
-import com.github.colorspace.rgb.Rgb;
 import com.github.utils.FloatArray;
 
 public abstract class ColorSpace {
