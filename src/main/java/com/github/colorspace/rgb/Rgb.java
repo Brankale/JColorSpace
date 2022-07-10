@@ -4,10 +4,12 @@ import com.github.colorspace.ColorModels;
 import com.github.colorspace.connector.Connector;
 import com.github.colorspace.connector.RenderIntent;
 import com.github.colorspace.ColorSpace;
+import com.github.colorspaces.ColorSpaces;
 import com.github.utils.FloatArray;
 import com.github.utils.MatrixUtils;
 import org.ejml.simple.SimpleMatrix;
 
+import java.awt.*;
 import java.util.List;
 import java.util.function.DoubleUnaryOperator;
 
@@ -262,11 +264,11 @@ public abstract class Rgb extends ColorSpace {
         return 1.0f;
     }
 
-    public Connector connect(Rgb destinationColorSpace) {
+    public Connector connect(ColorSpace destinationColorSpace) {
         return connect(destinationColorSpace, RenderIntent.ABSOLUTE);
     }
 
-    public Connector connect(Rgb destinationColorSpace, RenderIntent renderIntent) {
+    public Connector connect(ColorSpace destinationColorSpace, RenderIntent renderIntent) {
         return new Connector(this, destinationColorSpace, renderIntent);
     }
 
