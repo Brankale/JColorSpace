@@ -247,10 +247,9 @@ public abstract class Rgb extends ColorSpace {
 
     @Override
     public FloatArray fromXyz(FloatArray v) {
-        v = fromLinear(v);
         SimpleMatrix matrix = MatrixUtils.toSimpleMatrix(v, 3, 1);
         SimpleMatrix rgb = MatrixUtils.toSimpleMatrix(getInverseTransform(), 3, 3).mult(matrix);
-        return MatrixUtils.toFloatArray(rgb);
+        return fromLinear(MatrixUtils.toFloatArray(rgb));
     }
 
     @Override
