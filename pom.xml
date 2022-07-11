@@ -25,7 +25,7 @@
         <!-- fast and easy to use dense and sparse matrix linear algebra library -->
         <dependency>
             <groupId>org.ejml</groupId>
-            <artifactId>ejml-all</artifactId>
+            <artifactId>ejml-simple</artifactId>
             <version>0.41</version>
         </dependency>
 
