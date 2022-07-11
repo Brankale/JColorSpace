@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github</groupId>
-    <artifactId>libcs</artifactId>
+    <groupId>com.github.brankale.jcolorspace</groupId>
+    <artifactId>jcolorspace</artifactId>
     <version>1.0</version>
 
     <properties>
@@ -44,7 +44,7 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <outputFile>shade/${project.artifactId}.jar</outputFile>
+                    <outputFile>shade/${project.artifactId}_${project.version}.jar</outputFile>
                 </configuration>
                 <executions>
                     <execution>

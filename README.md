@@ -1,4 +1,4 @@
-# 🌈 lib ColorSpace 🌈
+# 🌈 JColorSpace 🌈
 
 This library lets you create new ColorSpaces and perform conversions between them.
 
