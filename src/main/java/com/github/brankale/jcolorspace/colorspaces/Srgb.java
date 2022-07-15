@@ -4,7 +4,7 @@ import com.github.brankale.jcolorspace.colorspace.rgb.Primaries;
 import com.github.brankale.jcolorspace.colorspace.rgb.Illuminant;
 import com.github.brankale.jcolorspace.colorspace.rgb.Rgb;
 
-public class Srgb extends Rgb {
+class Srgb extends Rgb {
     public Srgb() {
         super(
                 "sRGB IEC61966-2.1",

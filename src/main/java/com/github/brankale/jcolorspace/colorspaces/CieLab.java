@@ -9,7 +9,7 @@ import com.github.brankale.jcolorspace.colorspace.ColorModels;
 /**
  * Illuminant for CieLab is assumed to be D65
  */
-public class CieLab extends ColorSpace {
+class CieLab extends ColorSpace {
     private static final double E = 0.008856;
     private static final double K = 903.3;
     private static final WhitePoint illuminant = Illuminant.D65;

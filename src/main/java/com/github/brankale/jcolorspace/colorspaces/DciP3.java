@@ -4,7 +4,7 @@ import com.github.brankale.jcolorspace.colorspace.rgb.Rgb;
 import com.github.brankale.jcolorspace.colorspace.rgb.WhitePoint;
 import com.github.brankale.jcolorspace.utils.FloatArray;
 
-public class DciP3 extends Rgb {
+class DciP3 extends Rgb {
     public DciP3() {
         super(
                 "SMPTE RP 431-2-2007 DCI (P3)",
