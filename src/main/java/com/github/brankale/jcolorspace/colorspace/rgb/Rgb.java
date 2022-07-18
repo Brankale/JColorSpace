@@ -1,9 +1,9 @@
 package com.github.brankale.jcolorspace.colorspace.rgb;
 
+import com.github.brankale.jcolorspace.colorspace.ColorModel;
 import com.github.brankale.jcolorspace.colorspace.ColorSpace;
 import com.github.brankale.jcolorspace.utils.FloatArray;
 import com.github.brankale.jcolorspace.utils.MatrixUtils;
-import com.github.brankale.jcolorspace.colorspace.ColorModels;
 import com.github.brankale.jcolorspace.colorspace.connector.Connector;
 import com.github.brankale.jcolorspace.colorspace.connector.RenderIntent;
 import com.github.brankale.jcolorspace.colorspace.connector.RgbConnector;
@@ -102,7 +102,7 @@ public abstract class Rgb extends ColorSpace {
             DoubleUnaryOperator oetf,
             DoubleUnaryOperator eotf
     ) {
-        super(name, ColorModels.RGB);
+        super(name, ColorModel.RGB);
         this.primaries = new ChromaticyCoordinate[] {
                 new ChromaticyCoordinate(primaries.get(0), primaries.get(1)),
                 new ChromaticyCoordinate(primaries.get(2), primaries.get(3)),
@@ -131,7 +131,7 @@ public abstract class Rgb extends ColorSpace {
             List<DoubleUnaryOperator> oetf,
             List<DoubleUnaryOperator> eotf
     ) {
-        super(name, ColorModels.RGB);
+        super(name, ColorModel.RGB);
         this.primaries = new ChromaticyCoordinate[] {
                 new ChromaticyCoordinate(primaries.get(0), primaries.get(1)),
                 new ChromaticyCoordinate(primaries.get(2), primaries.get(3)),

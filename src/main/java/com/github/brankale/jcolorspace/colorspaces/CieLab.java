@@ -1,10 +1,10 @@
 package com.github.brankale.jcolorspace.colorspaces;
 
+import com.github.brankale.jcolorspace.colorspace.ColorModel;
 import com.github.brankale.jcolorspace.colorspace.ColorSpace;
 import com.github.brankale.jcolorspace.colorspace.rgb.Illuminant;
 import com.github.brankale.jcolorspace.colorspace.rgb.WhitePoint;
 import com.github.brankale.jcolorspace.utils.FloatArray;
-import com.github.brankale.jcolorspace.colorspace.ColorModels;
 
 /**
  * Illuminant for CieLab is assumed to be D65
@@ -15,7 +15,7 @@ class CieLab extends ColorSpace {
     private static final WhitePoint illuminant = Illuminant.D65;
 
     public CieLab() {
-        super("CIE Lab", ColorModels.Lab);
+        super("CIE Lab", ColorModel.Lab);
     }
 
     @Override
