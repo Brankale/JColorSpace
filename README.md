@@ -6,19 +6,19 @@ This library lets you create new ColorSpaces and perform conversions between the
 
 I would like to really thank:
 - the [Android documentation](https://developer.android.com/reference/android/graphics/ColorSpace) from which the architecture of the library is highly inspired.
-- Bruce Justin Lindbloom for his awesome [website](http://www.brucelindbloom.com/) from which I took the formulas.
+- Bruce Justin Lindbloom for his awesome [website](http://www.brucelindbloom.com/) where you can find all kinds of formulas.
 
 Without them this project wouldn't have been possible.
 
 ## How to use
 
-### ⚠⚠⚠ Important Notes ⚠⚠⚠
+### ⚠ Important Notes ⚠
 
 In their current state APIs are not quite stable, so It can be possible that the following code snippets are wrong.
 
 ### Creating a new Rgb ColorSpace
 
-`
+```java
 // extend Rgb class
 class Srgb extends Rgb {
     public Srgb() {
@@ -42,7 +42,8 @@ class Srgb extends Rgb {
             }
         );
     }
-}`
+}
+```
 
 There are lots of constructors to simplify colorspace creation. For example:
 - you can define a gamma value used for all the three channels
@@ -54,16 +55,18 @@ There are lots of constructors to simplify colorspace creation. For example:
 
 To create a non-RGB colorspace you must extend ColorSpace class.
 
-### Perform conversion between ColorSpaces
+### Perform conversion between colorspaces
 
-`
+```java
 // creates a connector between two color spaces
 Connector connector = ColorSpaces.CIE_LAB.connect(ColorSpaces.SRGB);
+
 // define a color in CIELab colorspace
 FloatArray lab = new FloatArray(0, 0, 0);
+
 // perform the conversion from CIELab to sRGB
 FloatArray rgb = connector.transform(lab);
-`
+```
 
 ## How does it differ from the Android colorspace lib
 
