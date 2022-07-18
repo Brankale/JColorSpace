@@ -58,11 +58,7 @@ class CieLab extends ColorSpace {
         double a = 500 * (fx - fy);
         double b = 200 * (fy - fz);
 
-        FloatArray array = new FloatArray(3);
-        array.set(0, (float) l);
-        array.set(1, (float) a);
-        array.set(2, (float) b);
-        return array;
+        return new FloatArray((float) l, (float) a, (float) b);
     }
 
     @Override
