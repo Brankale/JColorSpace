@@ -5,24 +5,9 @@ public class ColorModels {
         // hide constructor
     }
 
-    public static final ColorModel XYZ = new ColorModel() {
-        @Override
-        protected int componentCount() {
-            return 3;
-        }
-    };
+    public static final ColorModel XYZ = () -> 3;
 
-    public static final ColorModel RGB = new ColorModel() {
-        @Override
-        protected int componentCount() {
-            return 3;
-        }
-    };
+    public static final ColorModel RGB = () -> 3;
 
-    public static final ColorModel Lab = new ColorModel() {
-        @Override
-        protected int componentCount() {
-            return 3;
-        }
-    };
+    public static final ColorModel Lab = () -> 3;
 }

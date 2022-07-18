@@ -7,6 +7,6 @@ package com.github.brankale.jcolorspace.colorspace;
  * A common color model is the RGB color model which defines a color as
  * represented by a tuple of 3 numbers (red, green and blue).
  */
-public abstract class ColorModel {
-    protected abstract int componentCount();
+public interface ColorModel {
+    int componentCount();
 }
