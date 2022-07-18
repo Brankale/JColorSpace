@@ -32,9 +32,8 @@ public class RgbConnector extends Connector {
         return switch (renderIntent) {
             case ABSOLUTE -> dstTransformMtx.mult(srcTransformMtx);
             case RELATIVE -> dstTransformMtx.mult(chromaticAdaptationMtx).mult(srcTransformMtx);
-            // TODO: RenderIntent.PERCEPTUAL and RenderIntent.SATURATION behave like RenderIntent.RELATIVE
-            //       because I don't know how to implement them.
-            default -> dstTransformMtx.mult(chromaticAdaptationMtx).mult(srcTransformMtx);
+            // TODO: implement RenderIntent.PERCEPTUAL and RenderIntent.SATURATION
+            default -> throw new IllegalArgumentException(renderIntent.name() + " Render Intent is not yet supported");
         };
     }
 
