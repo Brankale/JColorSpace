@@ -48,6 +48,7 @@ public class RgbConnector extends Connector {
         SimpleMatrix linearSrcRgbMtx = MatrixUtils.toSimpleMatrix(linearSrcRgb, 3, 1);
         SimpleMatrix linearDstRgbMtx = conversionMatrix.mult(linearSrcRgbMtx);
         FloatArray linearDstRgb = MatrixUtils.toFloatArray(linearDstRgbMtx);
-        return ((Rgb) destination).fromLinear(linearDstRgb);
+        FloatArray result = ((Rgb) destination).fromLinear(linearDstRgb);
+        return clipping ? clip(result) : result;
     }
 }

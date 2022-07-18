@@ -17,6 +17,7 @@ public class SimpleConnector extends Connector {
     public FloatArray transform(FloatArray v) {
         FloatArray xyz = source.toXyz(v);
         // TODO: add support for chromatic adaptation
-        return destination.fromXyz(xyz);
+        FloatArray result = destination.fromXyz(xyz);
+        return clipping ? clip(result) : result;
     }
 }
