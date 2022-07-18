@@ -19,6 +19,12 @@ public class FloatArray {
         array = Arrays.copyOf(v, v.length);
     }
 
+    public FloatArray(FloatArray array) {
+        this.array = new float[array.size()];
+        for (int i = 0; i < array.size(); ++i)
+            this.array[i] = array.get(i);
+    }
+
     /**
      * @return the size of the array
      */
