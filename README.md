@@ -1,6 +1,6 @@
-# 🌈 JColorSpace 🌈
+<h1 align="center"><b>🌈 JColorSpace 🌈</b></h1>
 
-This library lets you create new ColorSpaces and perform conversions between them.
+This library lets you perform colorspace convertions, create new colorspaces and much more.
 
 ## Special thanks
 
