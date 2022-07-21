@@ -68,7 +68,17 @@ FloatArray lab = new FloatArray(0, 0, 0);
 FloatArray rgb = connector.transform(lab);
 ```
 
-## How does it differ from the Android colorspace lib
+### Calculate DeltaE 2000 between two colors
 
-TODO
- 
+```java
+
+// calculate deltaE between two colors of the same colorspace
+FloatArray color1 = new FloatArray(0, 0, 0);
+FloatArray color2 = new FloatArray(1, 1, 1);
+float deltaE = ColorSpaceUtils.deltaE(ColorSpace.SRGB, color1, color2);
+
+// calculate deltaE between two colors of different colorspaces
+FloatArray color1 = new FloatArray(0, 0, 0);
+FloatArray color2 = new FloatArray(1, 1, 1);
+float deltaE = ColorSpaceUtils.deltaE(ColorSpace.SRGB, color1, ColorSpace.DCI_P3, color2);
+```
