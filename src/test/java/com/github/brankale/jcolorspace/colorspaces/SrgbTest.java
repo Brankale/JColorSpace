@@ -1,7 +1,6 @@
 package com.github.brankale.jcolorspace.colorspaces;
 
 import com.github.brankale.jcolorspace.colorspace.ColorSpace;
-import com.github.brankale.jcolorspace.colorspaces.ColorSpaces;
 import com.github.brankale.jcolorspace.utils.FloatArray;
 import org.junit.jupiter.api.Test;
 

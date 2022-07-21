@@ -1,6 +1,5 @@
 package com.github.brankale.jcolorspace.utils;
 
-import com.github.brankale.jcolorspace.utils.FloatArray;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
