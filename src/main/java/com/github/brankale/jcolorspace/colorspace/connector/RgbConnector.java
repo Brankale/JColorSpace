@@ -48,6 +48,14 @@ public class RgbConnector extends Connector {
         SimpleMatrix linearSrcRgbMtx = MatrixUtils.toSimpleMatrix(linearSrcRgb, 3, 1);
         SimpleMatrix linearDstRgbMtx = conversionMatrix.mult(linearSrcRgbMtx);
         FloatArray linearDstRgb = MatrixUtils.toFloatArray(linearDstRgbMtx);
+        // rounding errors can lead to negative numbers.
+        // since fromLinear() can use powers with exponents between [0, 1], negative numbers leads
+        // irrational numbers or NaN in Java
+        linearDstRgb = new FloatArray(
+                Math.max(0, linearDstRgb.get(0)),
+                Math.max(0, linearDstRgb.get(1)),
+                Math.max(0, linearDstRgb.get(2))
+        );
         FloatArray result = ((Rgb) destination).fromLinear(linearDstRgb);
         return clipping ? clip(result) : result;
     }

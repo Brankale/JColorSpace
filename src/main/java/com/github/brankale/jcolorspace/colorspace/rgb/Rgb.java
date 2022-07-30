@@ -250,7 +250,16 @@ public abstract class Rgb extends ColorSpace {
     public FloatArray fromXyz(FloatArray v) {
         SimpleMatrix matrix = MatrixUtils.toSimpleMatrix(v, 3, 1);
         SimpleMatrix rgb = MatrixUtils.toSimpleMatrix(getInverseTransform(), 3, 3).mult(matrix);
-        return fromLinear(MatrixUtils.toFloatArray(rgb));
+        FloatArray linearRgb = MatrixUtils.toFloatArray(rgb);
+        // rounding errors can lead to negative numbers.
+        // since fromLinear() can use powers with exponents between [0, 1], negative numbers leads
+        // irrational numbers or NaN in Java
+        linearRgb = new FloatArray(
+                Math.max(0, linearRgb.get(0)),
+                Math.max(0, linearRgb.get(1)),
+                Math.max(0, linearRgb.get(2))
+        );
+        return fromLinear(linearRgb);
     }
 
     @Override
