@@ -1,5 +1,6 @@
 .idea
 target
 shade
+dependency-reduced-pom.xml
 
 *.dia~
