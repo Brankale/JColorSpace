@@ -1,6 +1,7 @@
 package com.github.brankale.jcolorspace.colorspace;
 
 import com.github.brankale.jcolorspace.colorspace.connector.Connector;
+import com.github.brankale.jcolorspace.colorspaces.CieLab;
 import com.github.brankale.jcolorspace.colorspaces.ColorSpaces;
 import com.github.brankale.jcolorspace.utils.FloatArray;
 
@@ -17,10 +18,14 @@ public class ColorSpaceUtils {
      * @return the deltaE 2000 between the two colors.
      */
     public static float deltaE(ColorSpace cs, FloatArray color1, FloatArray color2) {
-        Connector connector = cs.connect(ColorSpaces.CIE_LAB);
-        FloatArray lab1 = connector.transform(color1);
-        FloatArray lab2 = connector.transform(color2);
-        return deltaE2000(lab1, lab2);
+        if (cs instanceof CieLab) {
+            return deltaE2000(color1, color2);
+        } else {
+            Connector connector = cs.connect(ColorSpaces.CIE_LAB);
+            FloatArray lab1 = connector.transform(color1);
+            FloatArray lab2 = connector.transform(color2);
+            return deltaE2000(lab1, lab2);
+        }
     }
 
     /**
@@ -31,10 +36,24 @@ public class ColorSpaceUtils {
      * @return the deltaE 2000 between the two colors.
      */
     public static float deltaE(ColorSpace cs1, FloatArray color1, ColorSpace cs2, FloatArray color2) {
-        Connector connector1 = cs1.connect(ColorSpaces.CIE_LAB);
-        FloatArray lab1 = connector1.transform(color1);
-        Connector connector2 = cs2.connect(ColorSpaces.CIE_LAB);
-        FloatArray lab2 = connector2.transform(color2);
+        FloatArray lab1;
+        FloatArray lab2;
+
+        // TODO: remove instanceof
+        if (cs1 instanceof CieLab) {
+            lab1 = new FloatArray(color1);
+        } else {
+            Connector connector1 = cs1.connect(ColorSpaces.CIE_LAB);
+            lab1 = connector1.transform(color1);
+        }
+
+        if (cs2 instanceof CieLab) {
+            lab2 = new FloatArray(color2);
+        } else {
+            Connector connector2 = cs2.connect(ColorSpaces.CIE_LAB);
+            lab2 = connector2.transform(color2);
+        }
+
         return deltaE2000(lab1, lab2);
     }
 
