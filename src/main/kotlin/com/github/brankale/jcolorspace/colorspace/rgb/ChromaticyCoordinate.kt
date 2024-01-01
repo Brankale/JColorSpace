@@ -1,4 +1,7 @@
-package com.github.brankale.jcolorspace.colorspace.rgb;
+package com.github.brankale.jcolorspace.colorspace.rgb
 
-public record ChromaticyCoordinate(float x, float y) {
-}
+@JvmRecord
+data class ChromaticyCoordinate(
+    @JvmField val x: Float,
+    @JvmField val y: Float
+)

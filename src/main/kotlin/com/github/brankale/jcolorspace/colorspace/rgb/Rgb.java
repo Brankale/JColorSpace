@@ -144,9 +144,9 @@ public abstract class Rgb extends ColorSpace {
 
     public FloatArray getPrimaries() {
         return new FloatArray(
-                primaries[0].x(), primaries[0].y(),
-                primaries[1].x(), primaries[1].y(),
-                primaries[2].x(), primaries[2].y()
+                primaries[0].x, primaries[0].y,
+                primaries[1].x, primaries[1].y,
+                primaries[2].x, primaries[2].y
         );
     }
 
@@ -195,17 +195,17 @@ public abstract class Rgb extends ColorSpace {
         ChromaticyCoordinate g = getGreenChromaticityCoord();
         ChromaticyCoordinate b = getBlueChromaticityCoord();
 
-        double xr = r.x() / r.y();
-        double xg = g.x() / g.y();
-        double xb = b.x() / b.y();
+        double xr = r.x / r.y;
+        double xg = g.x / g.y;
+        double xb = b.x / b.y;
 
         double yr = 1.0f;
         double yg = 1.0f;
         double yb = 1.0f;
 
-        double zr = (1.0f - r.x() - r.y()) / r.y();
-        double zg = (1.0f - g.x() - g.y()) / g.y();
-        double zb = (1.0f - b.x() - b.y()) / b.y();
+        double zr = (1.0f - r.x - r.y) / r.y;
+        double zg = (1.0f - g.x - g.y) / g.y;
+        double zb = (1.0f - b.x - b.y) / b.y;
 
         SimpleMatrix tmp = new SimpleMatrix(3, 3, true, new double[] {
                 xr, xg, xb,
