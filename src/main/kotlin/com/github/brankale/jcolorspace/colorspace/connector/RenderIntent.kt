@@ -1,11 +1,11 @@
-package com.github.brankale.jcolorspace.colorspace.connector;
+package com.github.brankale.jcolorspace.colorspace.connector
 
 /**
  * A render intent determines how a connector maps colors from one color space
  * to another. The choice of mapping is important when the source color space
  * has a larger color gamut than the destination color space.
  */
-public enum RenderIntent {
+enum class RenderIntent {
     /**
      * Colors that are in the destination gamut are left unchanged.
      * Colors that fall outside the destination gamut are mapped to the closest possible
