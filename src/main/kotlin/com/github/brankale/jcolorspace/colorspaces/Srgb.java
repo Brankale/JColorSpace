@@ -1,7 +1,7 @@
 package com.github.brankale.jcolorspace.colorspaces;
 
-import com.github.brankale.jcolorspace.colorspace.rgb.Primaries;
 import com.github.brankale.jcolorspace.colorspace.rgb.Illuminant;
+import com.github.brankale.jcolorspace.colorspace.rgb.Primaries;
 import com.github.brankale.jcolorspace.colorspace.rgb.Rgb;
 
 class Srgb extends Rgb {

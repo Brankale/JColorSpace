@@ -2,11 +2,11 @@ package com.github.brankale.jcolorspace.colorspace.rgb;
 
 import com.github.brankale.jcolorspace.colorspace.ColorModel;
 import com.github.brankale.jcolorspace.colorspace.ColorSpace;
-import com.github.brankale.jcolorspace.utils.FloatArray;
-import com.github.brankale.jcolorspace.utils.MatrixUtils;
 import com.github.brankale.jcolorspace.colorspace.connector.Connector;
 import com.github.brankale.jcolorspace.colorspace.connector.RenderIntent;
 import com.github.brankale.jcolorspace.colorspace.connector.RgbConnector;
+import com.github.brankale.jcolorspace.utils.FloatArray;
+import com.github.brankale.jcolorspace.utils.MatrixUtils;
 import org.ejml.simple.SimpleMatrix;
 
 import java.util.List;

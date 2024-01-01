@@ -8,7 +8,8 @@ import com.github.brankale.jcolorspace.colorspace.rgb.WhitePoint;
 import com.github.brankale.jcolorspace.utils.FloatArray;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class DeltaETest {
 

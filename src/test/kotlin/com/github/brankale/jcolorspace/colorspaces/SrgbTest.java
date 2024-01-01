@@ -4,8 +4,6 @@ import com.github.brankale.jcolorspace.colorspace.ColorSpace;
 import com.github.brankale.jcolorspace.utils.FloatArray;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 /**
  * rgb values should be in range [0, 1].
  * Suppose we have 8bit for a channel ==> value = x / 2^8,
